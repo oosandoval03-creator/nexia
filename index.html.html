@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexia — Herramientas de IA para negocios reales</title>
+<meta name="description" content="Herramientas listas para usar que automatizan, aceleran y elevan la operación de tu empresa. Sin código. Sin curva de aprendizaje.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0A0F1E;--white:#FFFFFF;--gray-50:#F8FAFC;--gray-100:#F1F5F9;--gray-200:#E2E8F0;--gray-400:#94A3B8;--gray-600:#475569;--gray-800:#1E293B;--accent:#3B82F6;--accent2:#6366F1;--accent-light:rgba(59,130,246,.08);--accent-glow:rgba(59,130,246,.25);--green:#10B981;--amber:#F59E0B;--radius:12px}
+body{font-family:'Inter',sans-serif;color:var(--gray-800);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:64px;border-bottom:1px solid var(--gray-200);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100}
+.nav-logo{font-size:20px;font-weight:700;color:var(--navy);letter-spacing:-.5px;display:flex;align-items:center;gap:8px}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 6px var(--accent-glow)}50%{box-shadow:0 0 16px var(--accent)}}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--gray-600)}
+.nav-links a{transition:color .2s;cursor:pointer}.nav-links a:hover{color:var(--navy)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.lang-toggle{display:flex;background:var(--gray-100);border-radius:8px;padding:2px;gap:2px}
+.lang-btn{padding:4px 10px;border-radius:6px;font-size:12px;font-weight:500;color:var(--gray-600);border:none;background:transparent;cursor:pointer;transition:all .2s}
+.lang-btn.active{background:var(--white);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.btn-ghost{padding:8px 16px;border-radius:var(--radius);font-size:14px;font-weight:500;color:var(--gray-800);border:1px solid var(--gray-200);background:var(--white);cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-primary{padding:8px 18px;border-radius:var(--radius);font-size:14px;font-weight:600;color:#fff;background:var(--accent);border:none;cursor:pointer;transition:all .2s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px var(--accent-glow)}
+
+/* HERO */
+#canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero{position:relative;padding:90px 40px 80px;text-align:center;background:linear-gradient(180deg,#EEF4FF 0%,#F8FAFC 60%,var(--white) 100%);border-bottom:1px solid var(--gray-200);overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:float-orb 8s ease-in-out infinite}
+.orb1{width:400px;height:400px;background:rgba(59,130,246,.12);top:-100px;left:-80px}
+.orb2{width:300px;height:300px;background:rgba(99,102,241,.1);top:50px;right:-60px;animation-delay:3s}
+.orb3{width:200px;height:200px;background:rgba(16,185,129,.08);bottom:40px;left:40%;animation-delay:5s}
+@keyframes float-orb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-20px) scale(1.05)}}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.1);color:var(--accent);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:24px;border:1px solid rgba(59,130,246,.2)}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 2s ease-in-out infinite}
+.hero h1{font-size:52px;font-weight:700;color:var(--navy);line-height:1.1;letter-spacing:-.8px;max-width:700px;margin:0 auto 20px}
+.gradient-text{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:18px;color:var(--gray-600);max-width:520px;margin:0 auto 36px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-hero{padding:14px 28px;border-radius:var(--radius);font-size:15px;font-weight:600;cursor:pointer;transition:all .25s}
+.btn-hero-primary{color:#fff;background:var(--accent);border:none;box-shadow:0 4px 20px var(--accent-glow)}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px var(--accent-glow)}
+.btn-hero-secondary{color:var(--gray-800);background:var(--white);border:1px solid var(--gray-200)}
+.btn-hero-secondary:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-1px)}
+.hero-stats{display:flex;gap:48px;justify-content:center;margin-top:56px;padding-top:40px;border-top:1px solid var(--gray-200)}
+.stat-item{text-align:center}
+.stat-num{font-size:30px;font-weight:700;background:linear-gradient(135deg,var(--navy),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-label{font-size:13px;color:var(--gray-400);margin-top:2px}
+
+/* STRIP */
+.feature-strip{background:var(--navy);padding:20px 0;overflow:hidden}
+.strip-track{display:flex;gap:48px;animation:scroll-strip 22s linear infinite;width:max-content}
+.strip-item{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.65);font-size:13px;font-weight:500;white-space:nowrap}
+.strip-icon{color:var(--accent);font-size:16px}
+@keyframes scroll-strip{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+.section{padding:80px 40px;max-width:1100px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:52px}
+.section-eyebrow{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.section-title{font-size:34px;font-weight:700;color:var(--navy);letter-spacing:-.4px;margin-bottom:12px;line-height:1.2}
+.section-sub{font-size:16px;color:var(--gray-600);max-width:480px;margin:0 auto;line-height:1.7}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.product-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:28px;transition:all .3s;position:relative;overflow:hidden}
+.product-card::before{content:'';position:absolute;inset:0;border-radius:16px;opacity:0;transition:opacity .3s;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(59,130,246,.06) 0%,transparent 60%);pointer-events:none}
+.product-card:hover::before{opacity:1}
+.product-card:hover{border-color:rgba(59,130,246,.3);box-shadow:0 12px 40px rgba(59,130,246,.1);transform:translateY(-4px)}
+.product-card.featured{border-color:rgba(59,130,246,.25);background:linear-gradient(135deg,rgba(59,130,246,.04) 0%,rgba(99,102,241,.04) 100%)}
+.product-badge{position:absolute;top:20px;right:20px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.badge-pop{background:rgba(245,158,11,.12);color:var(--amber);border:1px solid rgba(245,158,11,.2)}
+.badge-new{background:rgba(16,185,129,.12);color:var(--green);border:1px solid rgba(16,185,129,.2)}
+.product-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:22px;transition:transform .3s}
+.product-card:hover .product-icon{transform:scale(1.1) rotate(-5deg)}
+.icon-blue{background:rgba(59,130,246,.1);color:var(--accent)}
+.icon-indigo{background:rgba(99,102,241,.1);color:var(--accent2)}
+.product-name{font-size:19px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.product-desc{font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:20px}
+.product-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+.product-tag{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;background:var(--gray-100);color:var(--gray-600);transition:all .2s}
+.product-card:hover .product-tag{background:rgba(59,130,246,.08);color:var(--accent)}
+.product-pricing{border-top:1px solid var(--gray-100);padding-top:20px;display:flex;align-items:center;justify-content:space-between}
+.product-price{font-size:24px;font-weight:700;color:var(--navy)}
+.product-price span{font-size:13px;font-weight:400;color:var(--gray-400)}
+/* Botón de compra — enlaza directamente a Stripe */
+.btn-buy{padding:9px 20px;border-radius:9px;font-size:13px;font-weight:600;color:#fff;background:var(--accent);border:none;cursor:pointer;transition:all .25s;display:inline-block;text-align:center}
+.btn-buy:hover{background:#2563EB;transform:scale(1.04);color:#fff}
+
+/* HOW */
+.how-section{background:var(--gray-50);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);padding:80px 40px}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;max-width:960px;margin:0 auto}
+.step-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:28px 22px;text-align:center;transition:all .3s;margin:0 8px}
+.step-card:hover{border-color:rgba(59,130,246,.3);box-shadow:0 8px 32px rgba(59,130,246,.08);transform:translateY(-4px)}
+.step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 4px 16px var(--accent-glow)}
+.step-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:8px}
+.step-desc{font-size:13px;color:var(--gray-600);line-height:1.6}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:860px;margin:0 auto}
+.price-card{background:var(--white);border:1px solid var(--gray-200);border-radius:16px;padding:30px;position:relative;transition:all .3s}
+.price-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.06)}
+.price-card.highlighted{border:2px solid var(--accent);background:linear-gradient(135deg,rgba(59,130,246,.04),rgba(99,102,241,.04))}
+.price-card.highlighted:hover{box-shadow:0 16px 48px var(--accent-glow)}
+.price-pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-size:11px;font-weight:600;padding:4px 16px;border-radius:20px;white-space:nowrap}
+.price-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.price-name{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.price-amount{font-size:36px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1}
+.price-amount sup{font-size:18px;vertical-align:super;font-weight:600}
+.price-amount span{font-size:14px;font-weight:400;color:var(--gray-400)}
+.price-desc{font-size:13px;color:var(--gray-600);margin:12px 0 20px;line-height:1.6}
+.price-features{list-style:none;margin-bottom:24px;display:flex;flex-direction:column;gap:10px}
+.price-features li{font-size:13px;color:var(--gray-600);display:flex;align-items:flex-start;gap:8px}
+.price-check{color:var(--green);font-size:15px;flex-shrink:0;margin-top:1px}
+.btn-price{width:100%;padding:12px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;border:none;display:block;text-align:center}
+.btn-price-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-price-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px var(--accent-glow);color:#fff}
+.btn-price-secondary{background:var(--white);color:var(--navy);border:1px solid var(--gray-200)}
+.btn-price-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CTA */
+.cta-section{background:var(--navy);padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:breathe 4s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.cta-section h2{font-size:36px;font-weight:700;color:#fff;margin-bottom:14px;position:relative;z-index:1;line-height:1.2}
+.cta-section p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:36px;position:relative;z-index:1}
+.btn-cta{padding:15px 36px;border-radius:var(--radius);font-size:15px;font-weight:600;color:#ffffff;background:transparent;border:2px solid rgba(255,255,255,.7);cursor:pointer;transition:all .25s;position:relative;z-index:1;display:inline-block}
+.btn-cta:hover{background:#fff;color:var(--navy);border-color:#fff;transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,255,255,.2)}
+
+/* FOOTER */
+.footer{padding:32px 40px;border-top:1px solid var(--gray-200);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--gray-400);flex-wrap:wrap;gap:12px}
+.footer-logo{font-size:17px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:var(--gray-400);transition:color .2s}
+.footer-links a:hover{color:var(--navy)}
+
+/* LANG */
+[data-lang="en"] .t-es,[data-lang="es"] .t-en{display:none}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div data-lang="es" id="root">
+
+<nav class="nav">
+  <div class="nav-logo"><div class="logo-dot"></div>Ne<span style="color:var(--accent)">x</span>ia</div>
+  <div class="nav-links">
+    <a href="#productos" class="t-es">Productos</a><a href="#productos" class="t-en">Products</a>
+    <a href="#precios" class="t-es">Precios</a><a href="#precios" class="t-en">Pricing</a>
+    <a href="#como-funciona" class="t-es">Cómo funciona</a><a href="#como-funciona" class="t-en">How it works</a>
+  </div>
+  <div class="nav-cta">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#productos" class="btn-primary t-es">Ver productos</a>
+    <a href="#productos" class="btn-primary t-en">Browse products</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero-section">
+  <canvas id="canvas"></canvas>
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div style="position:relative;z-index:2">
+    <div class="hero-badge fade-up"><div class="hero-badge-dot"></div><span class="t-es">Herramientas de IA para negocios reales</span><span class="t-en">AI tools for real businesses</span></div>
+    <h1 class="fade-up t-es" style="transition-delay:.1s">Tu negocio, <span class="gradient-text">mas inteligente</span> desde hoy</h1>
+    <h1 class="fade-up t-en" style="transition-delay:.1s">Your business, <span class="gradient-text">smarter</span> starting today</h1>
+    <p class="fade-up t-es" style="transition-delay:.2s">Herramientas listas para usar que automatizan, aceleran y elevan la operacion de tu empresa. Sin codigo. Sin curva de aprendizaje.</p>
+    <p class="fade-up t-en" style="transition-delay:.2s">Ready-to-use tools that automate, accelerate and elevate your business operations. No code. No learning curve.</p>
+    <div class="hero-btns fade-up" style="transition-delay:.3s">
+      <a href="#productos" class="btn-hero btn-hero-primary t-es">Ver productos</a>
+      <a href="#productos" class="btn-hero btn-hero-primary t-en">Browse products</a>
+      <a href="#como-funciona" class="btn-hero btn-hero-secondary t-es">Como funciona</a>
+      <a href="#como-funciona" class="btn-hero btn-hero-secondary t-en">How it works</a>
+    </div>
+    <div class="hero-stats fade-up" style="transition-delay:.4s">
+      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label t-es">Productos activos</div><div class="stat-label t-en">Active products</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label t-es">Listos para usar</div><div class="stat-label t-en">Ready to use</div></div>
+      <div class="stat-item"><div class="stat-num">IA</div><div class="stat-label t-es">Integrada</div><div class="stat-label t-en">Integrated</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="feature-strip">
+  <div class="strip-track">
+    <div class="strip-item"><i class="ti ti-bolt strip-icon"></i><span class="t-es">Implementacion en minutos</span><span class="t-en">Deploy in minutes</span></div>
+    <div class="strip-item"><i class="ti ti-shield-check strip-icon"></i><span class="t-es">Pago seguro con Stripe</span><span class="t-en">Secure payment with Stripe</span></div>
+    <div class="strip-item"><i class="ti ti-brain strip-icon"></i><span class="t-es">IA integrada en cada herramienta</span><span class="t-en">AI built into every tool</span></div>
+    <div class="strip-item"><i class="ti ti-refresh strip-icon"></i><span class="t-es">Actualizaciones de por vida</span><span class="t-en">Lifetime updates</span></div>
+    <div class="strip-item"><i class="ti ti-brand-whatsapp strip-icon"></i><span class="t-es">Soporte por WhatsApp</span><span class="t-en">WhatsApp support</span></div>
+    <div class="strip-item"><i class="ti ti-file-download strip-icon"></i><span class="t-es">Entrega instantanea por correo</span><span class="t-en">Instant email delivery</span></div>
+    <div class="strip-item"><i class="ti ti-bolt strip-icon"></i><span class="t-es">Implementacion en minutos</span><span class="t-en">Deploy in minutes</span></div>
+    <div class="strip-item"><i class="ti ti-shield-check strip-icon"></i><span class="t-es">Pago seguro con Stripe</span><span class="t-en">Secure payment with Stripe</span></div>
+    <div class="strip-item"><i class="ti ti-brain strip-icon"></i><span class="t-es">IA integrada en cada herramienta</span><span class="t-en">AI built into every tool</span></div>
+    <div class="strip-item"><i class="ti ti-refresh strip-icon"></i><span class="t-es">Actualizaciones de por vida</span><span class="t-en">Lifetime updates</span></div>
+    <div class="strip-item"><i class="ti ti-brand-whatsapp strip-icon"></i><span class="t-es">Soporte por WhatsApp</span><span class="t-en">WhatsApp support</span></div>
+    <div class="strip-item"><i class="ti ti-file-download strip-icon"></i><span class="t-es">Entrega instantanea por correo</span><span class="t-en">Instant email delivery</span></div>
+  </div>
+</div>
+
+<!-- PRODUCTOS -->
+<div class="section fade-up" id="productos">
+  <div class="section-header">
+    <div class="section-eyebrow t-es">Nuestros productos</div>
+    <div class="section-eyebrow t-en">Our products</div>
+    <div class="section-title t-es">Soluciones que funcionan desde el primer dia</div>
+    <div class="section-title t-en">Solutions that work from day one</div>
+    <div class="section-sub t-es">Cada herramienta resuelve un problema real de negocio, lista para implementar en minutos.</div>
+    <div class="section-sub t-en">Each tool solves a real business problem, ready to deploy in minutes.</div>
+  </div>
+  <div class="products-grid">
+    <div class="product-card featured" onmousemove="trackMouse(event,this)">
+      <span class="product-badge badge-pop t-es">Mas popular</span>
+      <span class="product-badge badge-pop t-en">Most popular</span>
+      <div class="product-icon icon-blue"><i class="ti ti-file-invoice"></i></div>
+      <div class="product-name">CotizaRapido</div>
+      <div class="product-desc t-es">Sistema de cotizacion automatica para PYMEs. Tus clientes suben su lista de materiales y reciben un PDF profesional en segundos, con vistas de administrador y cliente incluidas.</div>
+      <div class="product-desc t-en">Automated quotation system for SMEs. Clients upload their materials list and receive a professional PDF in seconds, with admin and client views included.</div>
+      <div class="product-tags">
+        <span class="product-tag t-es">Construccion</span><span class="product-tag t-en">Construction</span>
+        <span class="product-tag t-es">Refacciones</span><span class="product-tag t-en">Auto parts</span>
+        <span class="product-tag t-es">Comercio</span><span class="product-tag t-en">Commerce</span>
+      </div>
+      <div class="product-pricing">
+        <div>
+          <div class="product-price">$79 <span>USD</span></div>
+          <div style="font-size:11px;color:var(--gray-400);margin-top:2px" class="t-es">Pago unico</div>
+          <div style="font-size:11px;color:var(--gray-400);margin-top:2px" class="t-en">One-time payment</div>
+        </div>
+        <!-- STRIPE PAYMENT LINK — COTIZARAPIDO -->
+        <a href="https://buy.stripe.com/test_9B628ke8n9niey79sHgMw01" target="_blank" class="btn-buy t-es">Comprar</a>
+        <a href="https://buy.stripe.com/test_9B628ke8n9niey79sHgMw01" target="_blank" class="btn-buy t-en">Buy now</a>
+      </div>
+    </div>
+
+    <div class="product-card" onmousemove="trackMouse(event,this)">
+      <span class="product-badge badge-new t-es">Nuevo</span>
+      <span class="product-badge badge-new t-en">New</span>
+      <div class="product-icon icon-indigo"><i class="ti ti-layout-kanban"></i></div>
+      <div class="product-name">FlowOS</div>
+      <div class="product-desc t-es">Gestor de proyectos y tareas con seguimiento diario. Board, tabla, calendario, Gantt, agenda, notas, workflows y automatizaciones, todo en un solo sistema.</div>
+      <div class="product-desc t-en">Project and task manager with daily tracking. Board, table, calendar, Gantt, agenda, notes, workflows and automations, all in one system.</div>
+      <div class="product-tags">
+        <span class="product-tag t-es">Productividad</span><span class="product-tag t-en">Productivity</span>
+        <span class="product-tag t-es">Proyectos</span><span class="product-tag t-en">Projects</span>
+        <span class="product-tag">Workflows</span>
+      </div>
+      <div class="product-pricing">
+        <div>
+          <div class="product-price">$59 <span>USD</span></div>
+          <div style="font-size:11px;color:var(--gray-400);margin-top:2px" class="t-es">Pago unico</div>
+          <div style="font-size:11px;color:var(--gray-400);margin-top:2px" class="t-en">One-time payment</div>
+        </div>
+        <!-- STRIPE PAYMENT LINK — FLOWOS -->
+        <a href="https://buy.stripe.com/test_6oU4gsfcr8je9dNcETgMw00" target="_blank" class="btn-buy t-es">Comprar</a>
+        <a href="https://buy.stripe.com/test_6oU4gsfcr8je9dNcETgMw00" target="_blank" class="btn-buy t-en">Buy now</a>
+      </div>
+    </div>
+
+    <div class="product-card" style="border-style:dashed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:300px">
+      <div class="product-icon icon-blue" style="margin:0 auto 16px"><i class="ti ti-plus"></i></div>
+      <div class="product-name t-es">Proximamente</div>
+      <div class="product-name t-en">Coming soon</div>
+      <div class="product-desc t-es" style="margin-bottom:0;font-size:13px">Mas herramientas en desarrollo. Suscribete para ser el primero en saber.</div>
+      <div class="product-desc t-en" style="margin-bottom:0;font-size:13px">More tools in development. Subscribe to be the first to know.</div>
+      <button class="btn-ghost t-es" style="margin-top:20px" onclick="alert('Te notificaremos pronto!')">Notificame</button>
+      <button class="btn-ghost t-en" style="margin-top:20px" onclick="alert('We will notify you!')">Notify me</button>
+    </div>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<div class="how-section" id="como-funciona">
+  <div class="section-header">
+    <div class="section-eyebrow t-es">Como funciona</div>
+    <div class="section-eyebrow t-en">How it works</div>
+    <div class="section-title t-es">De la compra al uso en minutos</div>
+    <div class="section-title t-en">From purchase to use in minutes</div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card fade-up">
+      <div class="step-num">1</div>
+      <div class="step-title t-es">Elige tu herramienta</div><div class="step-title t-en">Choose your tool</div>
+      <div class="step-desc t-es">Selecciona el producto que resuelve tu problema.</div><div class="step-desc t-en">Select the product that solves your problem.</div>
+    </div>
+    <div class="step-card fade-up" style="transition-delay:.1s">
+      <div class="step-num">2</div>
+      <div class="step-title t-es">Paga de forma segura</div><div class="step-title t-en">Pay securely</div>
+      <div class="step-desc t-es">Pago procesado por Stripe con tu tarjeta o transferencia.</div><div class="step-desc t-en">Payment processed by Stripe with your card or transfer.</div>
+    </div>
+    <div class="step-card fade-up" style="transition-delay:.2s">
+      <div class="step-num">3</div>
+      <div class="step-title t-es">Recibe en tu correo</div><div class="step-title t-en">Receive by email</div>
+      <div class="step-desc t-es">Archivo e instrucciones completas al instante automaticamente.</div><div class="step-desc t-en">File and complete instructions instantly and automatically.</div>
+    </div>
+    <div class="step-card fade-up" style="transition-delay:.3s">
+      <div class="step-num">4</div>
+      <div class="step-title t-es">Empieza a usar</div><div class="step-title t-en">Start using it</div>
+      <div class="step-desc t-es">Sin instalaciones complicadas. Sin configuraciones tecnicas.</div><div class="step-desc t-en">No complicated installs. No technical setup.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRECIOS -->
+<div class="section fade-up" id="precios">
+  <div class="section-header">
+    <div class="section-eyebrow t-es">Precios</div>
+    <div class="section-eyebrow t-en">Pricing</div>
+    <div class="section-title t-es">Un precio. Sin sorpresas.</div>
+    <div class="section-title t-en">One price. No surprises.</div>
+    <div class="section-sub t-es">Pago unico por herramienta. Sin suscripciones. Sin cobros mensuales.</div>
+    <div class="section-sub t-en">One-time payment per tool. No subscriptions. No monthly charges.</div>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-label">Starter</div>
+      <div class="price-name t-es">Solo la herramienta</div>
+      <div class="price-name t-en">Tool only</div>
+      <div class="price-amount"><sup>$</sup>59-79 <span>USD</span></div>
+      <div class="price-desc t-es">Todo lo que necesitas para empezar de inmediato.</div>
+      <div class="price-desc t-en">Everything you need to start right away.</div>
+      <ul class="price-features">
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Archivo listo para usar</span><span class="t-en">Ready-to-use file</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Guia de instalacion en PDF</span><span class="t-en">PDF installation guide</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Actualizaciones de por vida</span><span class="t-en">Lifetime updates</span></li>
+      </ul>
+      <a href="#productos" class="btn-price btn-price-secondary t-es">Ver productos</a>
+      <a href="#productos" class="btn-price btn-price-secondary t-en">Browse products</a>
+    </div>
+    <div class="price-card highlighted">
+      <div class="price-pop t-es">Mas completo</div>
+      <div class="price-pop t-en">Most complete</div>
+      <div class="price-label">Pro</div>
+      <div class="price-name t-es">Con soporte y guia</div>
+      <div class="price-name t-en">With support and guidance</div>
+      <div class="price-amount"><sup>$</sup>99 <span>USD</span></div>
+      <div class="price-desc t-es">Implementa rapido y sin errores desde el inicio.</div>
+      <div class="price-desc t-en">Implement fast and error-free from the start.</div>
+      <ul class="price-features">
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Todo lo del Starter</span><span class="t-en">Everything in Starter</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Video de configuracion paso a paso</span><span class="t-en">Step-by-step setup video</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">30 dias de soporte por WhatsApp</span><span class="t-en">30 days WhatsApp support</span></li>
+      </ul>
+      <a href="mailto:contact@nexia.mx?subject=Plan%20Pro" class="btn-price btn-price-primary t-es">Contratar Pro</a>
+      <a href="mailto:contact@nexia.mx?subject=Pro%20Plan" class="btn-price btn-price-primary t-en">Get Pro</a>
+    </div>
+    <div class="price-card">
+      <div class="price-label">Done For You</div>
+      <div class="price-name t-es">Lo instalamos por ti</div>
+      <div class="price-name t-en">We install it for you</div>
+      <div class="price-amount"><sup>$</sup>249 <span>USD</span></div>
+      <div class="price-desc t-es">Te entregamos el sistema funcionando el mismo dia.</div>
+      <div class="price-desc t-en">We deliver the system running the same day.</div>
+      <ul class="price-features">
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Todo lo del Pro</span><span class="t-en">Everything in Pro</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Instalacion y configuracion completa</span><span class="t-en">Full installation and configuration</span></li>
+        <li><i class="ti ti-check price-check"></i><span class="t-es">Sesion de entrega de 45 min</span><span class="t-en">45-min handoff session</span></li>
+      </ul>
+      <a href="mailto:contact@nexia.mx?subject=Done%20For%20You" class="btn-price btn-price-secondary t-es">Contratar</a>
+      <a href="mailto:contact@nexia.mx?subject=Done%20For%20You" class="btn-price btn-price-secondary t-en">Get started</a>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 class="t-es">Listo para hacer tu negocio<br>mas inteligente?</h2>
+  <h2 class="t-en">Ready to make your business<br>smarter?</h2>
+  <p class="t-es">Unete a los negocios que ya usan Nexia para operar mejor, mas rapido y con menos esfuerzo.</p>
+  <p class="t-en">Join the businesses already using Nexia to operate better, faster and with less effort.</p>
+  <a href="#productos" class="btn-cta t-es">Ver todos los productos</a>
+  <a href="#productos" class="btn-cta t-en">Browse all products</a>
+</div>
+
+<footer class="footer">
+  <div class="footer-logo"><div class="logo-dot"></div>Ne<span style="color:var(--accent)">x</span>ia</div>
+  <div class="t-es" style="font-size:13px">2026 Nexia. Hecho para negocios reales.</div>
+  <div class="t-en" style="font-size:13px">2026 Nexia. Built for real businesses.</div>
+  <div class="footer-links">
+    <a href="https://stripe.com" target="_blank">Stripe</a>
+    <a href="mailto:contact@nexia.mx" class="t-es">Contacto</a>
+    <a href="mailto:contact@nexia.mx" class="t-en">Contact</a>
+  </div>
+</footer>
+
+</div>
+
+<script>
+function setLang(l){
+  document.getElementById('root').dataset.lang=l;
+  document.getElementById('btn-es').classList.toggle('active',l==='es');
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+}
+function trackMouse(e,card){
+  var r=card.getBoundingClientRect();
+  card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+  card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+}
+
+// Particles
+(function(){
+  var canvas=document.getElementById('canvas');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var W,H,mouseX=-9999,mouseY=-9999;
+  var particles=[];
+  function resize(){
+    var hero=document.getElementById('hero-section');
+    W=canvas.width=hero.offsetWidth;
+    H=canvas.height=hero.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+  document.getElementById('hero-section').addEventListener('mousemove',function(e){
+    var r=canvas.getBoundingClientRect();
+    mouseX=e.clientX-r.left;mouseY=e.clientY-r.top;
+  });
+  document.getElementById('hero-section').addEventListener('mouseleave',function(){
+    mouseX=-9999;mouseY=-9999;
+  });
+  for(var i=0;i<60;i++){
+    particles.push({
+      x:Math.random()*1200,y:Math.random()*500,
+      vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+      baseVx:(Math.random()-.5)*.35,baseVy:(Math.random()-.5)*.35,
+      r:Math.random()*2+.5,o:Math.random()*.45+.15
+    });
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(function(p){
+      var dx=mouseX-p.x,dy=mouseY-p.y,dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<140&&dist>1){p.vx+=(dx/dist)*.018*(1-dist/140);p.vy+=(dy/dist)*.018*(1-dist/140);}
+      p.vx+=(p.baseVx-p.vx)*.02;p.vy+=(p.baseVy-p.vy)*.02;
+      var sp=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+      if(sp>1.8){p.vx=(p.vx/sp)*1.8;p.vy=(p.vy/sp)*1.8;}
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+      var glow=dist<140?Math.min(1,p.o+.3*(1-dist/140)):p.o;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(59,130,246,'+glow+')';ctx.fill();
+    });
+    for(var i=0;i<particles.length;i++){
+      for(var j=i+1;j<particles.length;j++){
+        var a=particles[i],b=particles[j];
+        var dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<110){
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
+          ctx.strokeStyle='rgba(59,130,246,'+(0.13*(1-d/110))+')';
+          ctx.lineWidth=.6;ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// Scroll fade-up
+(function(){
+  var els=document.querySelectorAll('.fade-up');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});
+  },{threshold:.12});
+  els.forEach(function(el){io.observe(el);});
+  setTimeout(function(){
+    document.querySelectorAll('.hero .fade-up').forEach(function(el){el.classList.add('visible');});
+  },80);
+})();
+</script>
+</body>
+</html>
