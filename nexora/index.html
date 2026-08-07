@@ -365,6 +365,9 @@ tbody tr:hover{background:var(--gray-50);}
 #app[data-lang="es"] .t-es,#login-screen[data-lang="es"] .t-es,#onboarding-screen[data-lang="es"] .t-es{display:inline;}
 #app[data-lang="es"] .t-en,#login-screen[data-lang="es"] .t-en,#onboarding-screen[data-lang="es"] .t-en{display:none;}
 .app{display:none;} .app.visible{display:block;}
+
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-4); }
+.grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-4); }
 </style>
 </head>
 <body>
@@ -1865,6 +1868,29 @@ function renderTabContactos(c) {
     '</div>' + rows + '</div>';
 }
 
+function cotCambiarEstatus(sel, clienteId, qi) {
+  var c = getCliente(clienteId);
+  if (!c || !c.cotizaciones[qi]) return;
+  var nuevoEst = sel.value;
+  c.cotizaciones[qi].estatus = nuevoEst;
+  // Actualizar color del select
+  var clsMap = {
+    'Aceptada':'s-green','Autorizada':'s-green','Confirmada':'s-green',
+    'Enviada':'s-blue',
+    'Rechazada':'badge-red','Cancelada':'badge-red',
+    'Borrador':'s-gray'
+  };
+  sel.className = 'status-sel ' + (clsMap[nuevoEst] || 's-gray');
+  // Registrar en actividad
+  actividadGlobal.unshift({
+    tipo:'note',
+    texto:'Cotización ' + c.cotizaciones[qi].id + ' cambiada a ' + nuevoEst,
+    fecha:fechaHoy(), hora:horaHoy(),
+    clienteId: clienteId, clienteNombre: c.nombre
+  });
+  showToast((lang==='es'?'Estatus actualizado: ':'Status updated: ') + nuevoEst);
+}
+
 function renderTabCotizaciones(c) {
   var rows = c.cotizaciones.length
     ? '<table class="tbl" style="margin-top:8px"><thead><tr>' +
@@ -1874,13 +1900,28 @@ function renderTabCotizaciones(c) {
         '<th>' + (lang==='es'?'Estatus':'Status') + '</th>' +
         '<th></th>' +
       '</tr></thead><tbody>' +
-      c.cotizaciones.map(function(q) {
-        var cls = q.estatus === 'Aceptada' ? 's-green' : q.estatus === 'Enviada' ? 's-blue' : 's-gray';
+      c.cotizaciones.map(function(q, qi_idx) {
+        var cotEst = q.estatus || 'Borrador';
+        var cotCls = cotEst==='Aceptada'||cotEst==='Autorizada'||cotEst==='Confirmada' ? 's-green'
+                   : cotEst==='Enviada'   ? 's-blue'
+                   : cotEst==='Rechazada' || cotEst==='Cancelada' ? 'badge-red'
+                   : 's-gray';
+        var qi = qi_idx;
         return '<tr>' +
           '<td class="fw-600">' + q.id + '</td>' +
           '<td>' + q.fecha + '</td>' +
           '<td class="fw-600" style="color:var(--blue)">' + q.total + '</td>' +
-          '<td><select class="status-sel ' + cls + '"><option>' + q.estatus + '</option><option>Borrador</option><option>Enviada</option><option>Aceptada</option><option>Rechazada</option></select></td>' +
+          '<td>' +
+            '<select class="status-sel ' + cotCls + '" onchange="cotCambiarEstatus(this,' + c.id + ',' + qi + ')">' +
+              '<option value="Borrador"' + (cotEst==='Borrador'?' selected':'') + '>Borrador</option>' +
+              '<option value="Enviada"' + (cotEst==='Enviada'?' selected':'') + '>Enviada</option>' +
+              '<option value="Confirmada"' + (cotEst==='Confirmada'?' selected':'') + '>Confirmada</option>' +
+              '<option value="Autorizada"' + (cotEst==='Autorizada'?' selected':'') + '>Autorizada</option>' +
+              '<option value="Aceptada"' + (cotEst==='Aceptada'?' selected':'') + '>Aceptada</option>' +
+              '<option value="Rechazada"' + (cotEst==='Rechazada'?' selected':'') + '>Rechazada</option>' +
+              '<option value="Cancelada"' + (cotEst==='Cancelada'?' selected':'') + '>Cancelada</option>' +
+            '</select>' +
+          '</td>' +
           '<td><button class="btn btn-outline btn-xs"><i class="ti ti-download"></i></button></td>' +
         '</tr>';
       }).join('') +
